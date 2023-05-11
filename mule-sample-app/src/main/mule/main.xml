@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="mainHttpFlow" doc:id="87f03bf5-fc82-4ad5-9cbc-5bd5f7e93462" >
+		<http:listener doc:name="Listener" doc:id="35658e91-d0f2-4661-a8ce-65d7ed6bc808" config-ref="http-listener-config" path="/ping"/>
+		<flow-ref doc:name="common-util-getHealthCheckRespSubFlow" doc:id="c9bc9373-c039-496f-99bc-45819f076d3e" name="common-util-getHealthCheckRespSubFlow"/>
+	</flow>
+	<flow name="mainHttpsFlow" doc:id="1c92a64f-93ab-4df5-8682-518635c581a4" >
+		<http:listener doc:name="Listener" doc:id="a0c480c1-e94e-4810-a435-b4fe99c9d785" config-ref="https-listener-config" path="/ping"/>
+		<flow-ref doc:name="common-util-getHealthCheckRespSubFlow" doc:id="15a7175e-7722-48fb-bc17-3ba9ec631acc" name="common-util-getHealthCheckRespSubFlow" />
+	</flow>
+	<flow name="mainHttpPrivateFlow" doc:id="1a649a15-c5ea-4ad2-ab6b-048423a42eb0" >
+		<http:listener doc:name="Listener" doc:id="53bac523-8150-4352-9039-2e03a0eac9df" config-ref="http-private-listener-config" path="/ping"/>
+		<flow-ref doc:name="common-util-getHealthCheckRespSubFlow" doc:id="028b8cfc-73ae-412d-b250-7d5bfe4214a7" name="common-util-getHealthCheckRespSubFlow"/>
+	</flow>
+	<flow name="mainHttpsPrivateFlow" doc:id="2faac944-dfe9-4d99-8417-ce40df7101b7" >
+		<http:listener doc:name="Listener" doc:id="a30410bf-c3bc-48a4-b4e4-1426dd22b1ee" config-ref="https-private-listener-config" path="/ping"/>
+		<flow-ref doc:name="common-util-getHealthCheckRespSubFlow" doc:id="eebd6434-a3d9-4ca4-8ec7-ba0875b08a9d" name="common-util-getHealthCheckRespSubFlow" />
+	</flow>
+</mule>

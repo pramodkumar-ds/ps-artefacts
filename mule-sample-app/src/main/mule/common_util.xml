@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:module-logger="http://www.mulesoft.org/schema/mule/module-logger"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/module-logger http://www.mulesoft.org/schema/mule/module-logger/current/mule-module-logger.xsd">
+
+
+	<sub-flow name="common-util-getHealthCheckRespSubFlow"
+		doc:id="9cb9e51a-55ef-42e6-a432-8aa3aa095e81">
+		<ee:transform doc:name="Set varVerboseFlag"
+			doc:id="a53b9120-85be-4b00-9cff-3cc0a41ccb92">
+			<ee:message>
+			</ee:message>
+			<ee:variables>
+				<ee:set-variable
+					resource="dwl/healthcheck/getVerboseFlag.dwl"
+					variableName="varVerboseFlag" />
+			</ee:variables>
+		</ee:transform>
+		<choice doc:name="mode?"
+			doc:id="4cd67541-8e64-451c-8415-d122a56a3ca1">
+			<when expression="#[vars.varVerboseFlag]">
+				<ee:transform doc:name="Verbose response payload"
+					doc:id="25521651-0faa-41c6-8eb2-de06fa7ce8b3">
+					<ee:message>
+						<ee:set-payload
+							resource="dwl/healthcheck/setVerboseResponse.dwl" />
+					</ee:message>
+				</ee:transform>
+			
+</when>
+			<otherwise>
+				<ee:transform doc:name="Default response payload"
+					doc:id="20eb9d45-0163-4076-ba84-2a2f41425356">
+					<ee:message>
+						<ee:set-payload
+							resource="dwl/healthcheck/setBasicResponse.dwl" />
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+	</sub-flow>
+
+</mule>

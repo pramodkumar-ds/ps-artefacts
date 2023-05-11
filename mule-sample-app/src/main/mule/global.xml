@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<configuration-properties doc:name="configuration-properties" doc:id="48a296d1-6761-4ab0-ab7c-f62f1216f803" file="common.yaml" />
+	<http:listener-config name="http-listener-config" doc:name="HTTP Listener config" doc:id="0df21b2c-92a7-4a12-8641-c0b80462b19f" >
+		<http:listener-connection host="${http.host}" port="${http.port}" />
+	</http:listener-config>
+	<http:listener-config name="https-listener-config" doc:name="HTTP Listener config" doc:id="c62dde8b-6d20-4ce8-86d0-afb901646be6" >
+		<http:listener-connection protocol="HTTPS" host="${https.host}" port="${https.port}" tlsContext="tls-context"/>
+	</http:listener-config>
+	<http:listener-config name="http-private-listener-config" doc:name="HTTP Listener config" doc:id="a17d8bdd-11d4-43a0-9aec-9e0ce4d1ecdd" >
+		<http:listener-connection host="${http.host}" port="${http.private.port}" />
+	</http:listener-config>
+	<http:listener-config name="https-private-listener-config" doc:name="HTTP Listener config" doc:id="3522e3d4-c658-46aa-a1c0-fc961c12e03b" >
+		<http:listener-connection protocol="HTTPS" host="${https.host}" port="${https.private.port}" tlsContext="tls-context"/>
+	</http:listener-config>
+	<tls:context name="tls-context" doc:name="TLS Context" doc:id="3b52dfe2-a96a-418f-8518-c33da9bd0d4f" >
+		<tls:trust-store insecure="true" />
+		<tls:key-store type="jks" path="ssl/sample-keystore.jks" alias="mulesoft" keyPassword="mulesoft123!" password="mulesoft123!"/>
+	</tls:context>
+</mule>
